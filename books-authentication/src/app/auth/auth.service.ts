@@ -43,8 +43,6 @@ export class AuthService {
       password: registerDto.password,
     });
 
-    console.log(createdUser.id);
-
     const tokens = await this.authTokensService.generateOpaqueTokens({
       userId: createdUser.id,
       role: createdUser.role,
@@ -105,3 +103,4 @@ export class AuthService {
     await this.authTokensService.revokeTokensByUserId(userId);
   }
 }
+

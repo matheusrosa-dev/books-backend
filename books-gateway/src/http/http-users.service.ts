@@ -20,7 +20,6 @@ export class HttpUsersService implements IHttpUsersService {
 
   async getById(params: IGetByIdParams) {
     try {
-      console.log('getById', params.userId);
       const response = await axios.get<IGetByIdResponse>(
         `${this.baseUrl}/${params.userId}`,
       );
