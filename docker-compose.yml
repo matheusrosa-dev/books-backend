@@ -1,0 +1,60 @@
+services:
+  books-gateway-api:
+    build: ./books-gateway
+    container_name: books-gateway
+    ports:
+      - 3001:3001
+    environment:
+      API_PORT: 3001
+      USERS_API_URL: http://books-users-api:3001
+      AUTH_API_URL: http://books-authentication-api:3001
+
+  books-users-api:
+    build: ./books-users
+    container_name: books-users-api
+    environment:
+      API_PORT: 3001
+      DATABASE_PORT: 5432
+      DATABASE_HOST: books-users-db
+      DATABASE_USER: root
+      DATABASE_PASSWORD: root
+      DATABASE_NAME: users-db
+    depends_on:
+      - books-users-db
+
+  books-users-db:
+    image: postgres:18
+    container_name: books-users-db
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: users-db
+
+  books-authentication-api:
+    build: ./books-authentication
+    container_name: books-authentication-api
+    environment:
+      API_PORT: 3001
+      DATABASE_PORT: 5432
+      DATABASE_HOST: books-authentication-db
+      DATABASE_USER: root
+      DATABASE_PASSWORD: root
+      DATABASE_NAME: authentication-db
+      REDIS_PORT: 6379
+      REDIS_HOST: books-authentication-redis
+      USERS_API_URL: http://books-users-api:3001
+    depends_on:
+      - books-authentication-db
+      - books-authentication-redis
+
+  books-authentication-db:
+    image: postgres:18
+    container_name: books-authentication-db
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: authentication-db
+
+  books-authentication-redis:
+    image: redis:7
+    container_name: books-authentication-redis
