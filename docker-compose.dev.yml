@@ -36,8 +36,15 @@ services:
       DATABASE_USER: root
       DATABASE_PASSWORD: root
       DATABASE_NAME: users-db
+      RABBITMQ_USER: root
+      RABBITMQ_PASSWORD: root
+      RABBITMQ_HOST: books-rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERS_QUEUE: users_queue
+      RABBITMQ_DURABLE: false
     depends_on:
       - books-users-db
+      - books-rabbitmq
 
   books-users-db:
     image: postgres:18
@@ -65,9 +72,16 @@ services:
       REDIS_PORT: 6379
       REDIS_HOST: books-authentication-redis
       USERS_API_URL: http://books-users-api:3001
+      RABBITMQ_USER: root
+      RABBITMQ_PASSWORD: root
+      RABBITMQ_HOST: books-rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERS_QUEUE: users_queue
+      RABBITMQ_DURABLE: false
     depends_on:
       - books-authentication-db
       - books-authentication-redis
+      - books-rabbitmq
 
   books-authentication-db:
     image: postgres:18

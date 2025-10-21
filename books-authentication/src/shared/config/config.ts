@@ -7,6 +7,7 @@ import {
   IApiConfig,
   IUsersApiConfig,
   IRedisConfig,
+  IRabbitMQConfig,
 } from './interfaces';
 
 export const apiConfig = registerAs<IApiConfig>('api', () => ({
@@ -30,6 +31,15 @@ export const redisConfig = registerAs<IRedisConfig>('redis', () => ({
   host: process.env.REDIS_HOST!,
 }));
 
+export const rabbitmqConfig = registerAs<IRabbitMQConfig>('rabbitmq', () => ({
+  port: Number(process.env.RABBITMQ_PORT),
+  host: process.env.RABBITMQ_HOST!,
+  user: process.env.RABBITMQ_USER!,
+  password: process.env.RABBITMQ_PASSWORD!,
+  usersQueue: process.env.RABBITMQ_USERS_QUEUE!,
+  durable: process.env.RABBITMQ_DURABLE === 'true',
+}));
+
 export const validationSchema = Joi.object({
   API_PORT: Joi.number().required(),
 
@@ -43,4 +53,11 @@ export const validationSchema = Joi.object({
   REDIS_HOST: Joi.string().required(),
 
   USERS_API_URL: Joi.string().required(),
+
+  RABBITMQ_PORT: Joi.number().required(),
+  RABBITMQ_HOST: Joi.string().required(),
+  RABBITMQ_USER: Joi.string().required(),
+  RABBITMQ_PASSWORD: Joi.string().required(),
+  RABBITMQ_USERS_QUEUE: Joi.string().required(),
+  RABBITMQ_DURABLE: Joi.boolean().required(),
 });

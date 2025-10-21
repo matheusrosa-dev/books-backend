@@ -2,7 +2,7 @@ import { registerAs } from '@nestjs/config';
 import * as Joi from 'joi';
 import 'dotenv/config';
 
-import { IDatabaseConfig, IApiConfig } from './interfaces';
+import { IDatabaseConfig, IApiConfig, IRabbitMQConfig } from './interfaces';
 
 export const apiConfig = registerAs<IApiConfig>('api', () => ({
   port: Number(process.env.API_PORT),
@@ -16,6 +16,15 @@ export const databaseConfig = registerAs<IDatabaseConfig>('database', () => ({
   name: process.env.DATABASE_NAME!,
 }));
 
+export const rabbitmqConfig = registerAs<IRabbitMQConfig>('rabbitmq', () => ({
+  port: Number(process.env.RABBITMQ_PORT),
+  host: process.env.RABBITMQ_HOST!,
+  user: process.env.RABBITMQ_USER!,
+  password: process.env.RABBITMQ_PASSWORD!,
+  usersQueue: process.env.RABBITMQ_USERS_QUEUE!,
+  durable: process.env.RABBITMQ_DURABLE === 'true',
+}));
+
 export const validationSchema = Joi.object({
   API_PORT: Joi.number().required(),
 
@@ -24,4 +33,11 @@ export const validationSchema = Joi.object({
   DATABASE_USER: Joi.string().required(),
   DATABASE_PASSWORD: Joi.string().required(),
   DATABASE_NAME: Joi.string().required(),
+
+  RABBITMQ_PORT: Joi.number().required(),
+  RABBITMQ_HOST: Joi.string().required(),
+  RABBITMQ_USER: Joi.string().required(),
+  RABBITMQ_PASSWORD: Joi.string().required(),
+  RABBITMQ_USERS_QUEUE: Joi.string().required(),
+  RABBITMQ_DURABLE: Joi.boolean().required(),
 });

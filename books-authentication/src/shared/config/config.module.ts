@@ -7,12 +7,19 @@ import {
   usersApiConfig,
   validationSchema,
   redisConfig,
+  rabbitmqConfig,
 } from './config';
 
 @Module({
   imports: [
     NestConfigModule.forRoot({
-      load: [apiConfig, databaseConfig, usersApiConfig, redisConfig],
+      load: [
+        apiConfig,
+        databaseConfig,
+        usersApiConfig,
+        redisConfig,
+        rabbitmqConfig,
+      ],
       isGlobal: true,
       envFilePath: '.env',
       validationSchema,

@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import * as cookieParser from 'cookie-parser';
+import { IApiConfig } from './shared/config/interfaces';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,8 +14,8 @@ async function bootstrap() {
 
   const config = app.get<ConfigService>(ConfigService);
 
-  const port = config.get<number>('api.port');
+  const apiConfig = config.get<IApiConfig>('api')!;
 
-  await app.listen(port!);
+  await app.listen(apiConfig.port);
 }
 bootstrap();
