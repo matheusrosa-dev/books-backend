@@ -10,9 +10,9 @@ import {
   RefreshSessionDto,
   RegisterDto,
 } from './dtos';
-import { HttpUsersService } from '../../http/http-users.service';
 import { UsersAuthService } from '../users-auth/users-auth.service';
 import { AuthTokensService } from '../../providers/redis/auth-tokens.service';
+import { HttpUsersService } from '../../shared/http/http-users.service';
 
 @Injectable()
 export class AuthService {
@@ -103,4 +103,3 @@ export class AuthService {
     await this.authTokensService.revokeTokensByUserId(userId);
   }
 }
-

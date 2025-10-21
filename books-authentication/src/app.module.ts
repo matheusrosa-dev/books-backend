@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from './config/config.module';
-import { PostgresModule } from './providers/postgres/postgres.module';
+import { ConfigModule } from './shared/config/config.module';
+import { PostgresModule } from './providers';
 import { AuthModule, UsersAuthModule } from './app';
-import { HttpModule } from './http/http.module';
 import { RedisModule } from './providers';
+import { HttpModule } from './shared/http/http.module';
 
 @Module({
   imports: [

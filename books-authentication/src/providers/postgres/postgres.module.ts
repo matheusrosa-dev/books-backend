@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
-import { ConfigModule } from '../../config/config.module';
-import { IDatabaseConfig } from '../../config/interfaces';
+import { ConfigModule } from '../../shared/config/config.module';
+import { IDatabaseConfig } from '../../shared/config/interfaces';
 
 @Module({
   imports: [

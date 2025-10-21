@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, Unique } from 'typeorm';
-import { BaseEntity } from '../../../common/entities';
+import { BaseEntity } from '../../../shared/common/entities';
 import { Role } from './role.entity';
 
 @Entity('users')

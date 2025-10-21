@@ -11,6 +11,11 @@ export interface IGetByIdResponse {
   updatedAt: string;
 }
 
+export interface IUpdateEmailBody {
+  email: string;
+}
+
 export interface IHttpUsersService {
   getById: (userId: IGetByIdParams) => Promise<IGetByIdResponse>;
+  updateEmail: (userId: string, body: IUpdateEmailBody) => Promise<void>;
 }

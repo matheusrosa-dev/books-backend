@@ -6,8 +6,8 @@ POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
-  "name": "test",
-  "email": "test@test.com",
+  "name": "test2",
+  "email": "test2@test.com",
   "password": "12345_Aa"
 }
 
@@ -16,12 +16,21 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "test@test.com",
+  "email": "test3@test.com",
   "password": "12345_Aa"
 }
 
 ### Logout
 POST {{baseUrl}}/auth/logout
 
-### Get Me
+### Get me
 GET {{baseUrl}}/me
+
+### Update email
+PUT {{baseUrl}}/me/update-email
+Content-Type: application/json
+
+{
+  "email": "test3@test.com",
+  "password": "12345_Aa"
+}

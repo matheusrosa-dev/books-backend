@@ -1,5 +1,5 @@
 import { BeforeInsert, Column, Entity, Unique } from 'typeorm';
-import { BaseEntity } from '../../../common/entities';
+import { BaseEntity } from '../../../shared/common/entities';
 import * as bcrypt from 'bcrypt';
 
 @Entity('users-auth')

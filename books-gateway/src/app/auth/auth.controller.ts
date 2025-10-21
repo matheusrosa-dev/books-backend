@@ -1,8 +1,8 @@
 import { Controller, Post, Req, Res } from '@nestjs/common';
 import type { Request, Response } from 'express';
-import { HttpAuthService } from '../../http/http-auth.service';
-import { CurrentSession, Public } from '../../decorators';
-import type { ISession } from '../../interfaces/session.interface';
+import { CurrentSession, Public } from '../../shared/decorators';
+import type { ISession } from '../../shared/interfaces/session.interface';
+import { HttpAuthService } from '../../shared/http/http-auth.service';
 
 @Controller('auth')
 export class AuthController {

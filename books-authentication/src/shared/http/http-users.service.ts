@@ -1,12 +1,12 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
-import { IUsersApiConfig } from '../config/interfaces';
 import {
   ICreateUserBody,
   ICreateUserResponse,
   IHttpUsersService,
 } from './interfaces';
+import { IUsersApiConfig } from '../config/interfaces';
 
 @Injectable()
 export class HttpUsersService implements IHttpUsersService {

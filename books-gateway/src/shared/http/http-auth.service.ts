@@ -12,8 +12,8 @@ import {
   IGetSessionByTokenParams,
   IGetSessionByTokenResponse,
 } from './interfaces/http-auth.interface';
-import { ProxyError } from '../errors';
 import { ConfigService } from '@nestjs/config';
+import { ProxyError } from '../errors';
 
 @Injectable()
 export class HttpAuthService implements IHttpAuthService {

@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto, UsersDto } from './dtos';
-import { Serialize } from '../../interceptors/serialize.interceptor';
+import { CreateUserDto, UpdateEmailDto, UsersDto } from './dtos';
+import { Serialize } from '../../interceptors';
 
 @Controller('users')
 @Serialize(UsersDto)
@@ -9,12 +9,20 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  createUser(@Body() createUserDto: CreateUserDto) {
+  create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
   @Get(':userId')
   findById(@Param('userId') userId: string) {
     return this.usersService.findById(userId);
+  }
+
+  @Put(':userId/update-email')
+  updateEmail(
+    @Param('userId') userId: string,
+    @Body() updateEmailDto: UpdateEmailDto,
+  ) {
+    return this.usersService.updateEmail(userId, updateEmailDto);
   }
 }

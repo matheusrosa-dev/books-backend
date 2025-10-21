@@ -4,9 +4,10 @@ import {
   IGetByIdParams,
   IGetByIdResponse,
   IHttpUsersService,
+  IUpdateEmailBody,
 } from './interfaces/http-users.interface';
-import { ProxyError } from '../errors';
 import { ConfigService } from '@nestjs/config';
+import { ProxyError } from '../errors';
 
 @Injectable()
 export class HttpUsersService implements IHttpUsersService {
@@ -22,6 +23,19 @@ export class HttpUsersService implements IHttpUsersService {
     try {
       const response = await axios.get<IGetByIdResponse>(
         `${this.baseUrl}/${params.userId}`,
+      );
+
+      return response.data;
+    } catch (err) {
+      throw new ProxyError(err);
+    }
+  }
+
+  async updateEmail(userId: string, body: IUpdateEmailBody) {
+    try {
+      const response = await axios.put(
+        `${this.baseUrl}/${userId}/update-email`,
+        body,
       );
 
       return response.data;

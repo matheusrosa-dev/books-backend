@@ -12,6 +12,17 @@ services:
       USERS_API_URL: http://books-users-api:3001
       AUTH_API_URL: http://books-authentication-api:3001
 
+  books-rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: books-rabbitmq
+    ports:
+      - 15672:15672
+    volumes:
+      - books-rabbitmq:/var/lib/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: root
+      RABBITMQ_DEFAULT_PASS: root
+
   books-users-api:
     build: ./books-users
     container_name: books-users-api
@@ -35,6 +46,8 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: users-db
+    volumes:
+      - books-users-db:/var/lib/postgresql/data
 
   books-authentication-api:
     build: ./books-authentication
@@ -63,7 +76,17 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: authentication-db
+    volumes:
+      - books-authentication-db:/var/lib/postgresql/data
 
   books-authentication-redis:
     image: redis:7
     container_name: books-authentication-redis
+    volumes:
+      - books-authentication-redis:/data
+
+volumes:
+  books-users-db:
+  books-authentication-db:
+  books-authentication-redis:
+  books-rabbitmq:

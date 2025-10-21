@@ -1,3 +1,4 @@
 adicionar rota alterar senha
 adicionar rota esqueci a senha
 adicionar rota de editar perfil
+implementar exclusao de usuario

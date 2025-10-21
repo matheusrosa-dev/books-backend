@@ -9,6 +9,15 @@ services:
       USERS_API_URL: http://books-users-api:3001
       AUTH_API_URL: http://books-authentication-api:3001
 
+  books-rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: books-rabbitmq
+    ports:
+      - 15672:15672
+    environment:
+      RABBITMQ_DEFAULT_USER: root
+      RABBITMQ_DEFAULT_PASS: root
+
   books-users-api:
     build: ./books-users
     container_name: books-users-api
