@@ -14,4 +14,10 @@ export class UsersRabbitMQService {
       email,
     });
   }
+
+  deleteAccount(userId: string) {
+    return this.client.emit('users.delete_account', {
+      userId,
+    });
+  }
 }

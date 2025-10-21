@@ -13,4 +13,14 @@ export class UsersAuthRabbitMQService {
       },
     );
   }
+
+  async deleteAccount(userId: string) {
+    const user = await this.usersAuthRepository.findOne({
+      where: { userId },
+    });
+
+    if (user) {
+      await this.usersAuthRepository.softRemove(user);
+    }
+  }
 }

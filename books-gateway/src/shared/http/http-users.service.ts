@@ -43,4 +43,14 @@ export class HttpUsersService implements IHttpUsersService {
       throw new ProxyError(err);
     }
   }
+
+  async delete(userId: string) {
+    try {
+      const response = await axios.delete(`${this.baseUrl}/${userId}`);
+
+      return response.data;
+    } catch (err) {
+      throw new ProxyError(err);
+    }
+  }
 }

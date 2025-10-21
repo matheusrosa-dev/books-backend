@@ -53,6 +53,7 @@ export class AuthService {
 
   async login(loginDto: LoginDto) {
     const foundUser = await this.usersAuthService.findByEmail(loginDto.email);
+    console.log('foundUser: ', foundUser);
 
     if (!foundUser) {
       throw new BadRequestException('Invalid credentials');

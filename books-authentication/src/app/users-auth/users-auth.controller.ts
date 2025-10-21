@@ -13,4 +13,9 @@ export class UsersAuthController {
   updateEmail(@Payload() data: { userId: string; email: string }) {
     return this.usersAuthRabbitMQService.updateEmail(data);
   }
+
+  @EventPattern('users.delete_account')
+  deleteAccount(@Payload() data: { userId: string }) {
+    return this.usersAuthRabbitMQService.deleteAccount(data.userId);
+  }
 }

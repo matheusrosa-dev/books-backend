@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Put } from '@nestjs/common';
 import { CurrentSession } from '../../shared/decorators';
 import type { ISession } from '../../shared/interfaces/session.interface';
 import { HttpUsersService } from '../../shared/http/http-users.service';
@@ -19,6 +19,13 @@ export class MeController {
   @Put('update-email')
   async updateEmail(@CurrentSession() session: ISession, @Body() body) {
     const data = await this.httpUsersService.updateEmail(session.userId, body);
+
+    return data;
+  }
+
+  @Delete()
+  async delete(@CurrentSession() session: ISession) {
+    const data = await this.httpUsersService.delete(session.userId);
 
     return data;
   }

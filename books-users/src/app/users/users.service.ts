@@ -75,4 +75,16 @@ export class UsersService {
 
     this.usersRabbitMQService.updateEmail(userId, dto.email);
   }
+
+  async delete(userId: string) {
+    const user = await this.usersRepository.findOne({
+      where: { id: userId },
+    });
+
+    if (!user) throw new NotFoundException('User not found');
+
+    await this.usersRepository.softRemove(user);
+
+    this.usersRabbitMQService.deleteAccount(userId);
+  }
 }
